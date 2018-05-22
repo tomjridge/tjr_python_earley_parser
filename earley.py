@@ -189,16 +189,6 @@ def loop_k(s: State, ip: Input_parameters):
     return s
 
 
-# entry to Earley parsing
-#
-# the returned value is the final parsing state
-#
-# in this state, ixk_done contains a set of pairs (i,_X), indicating
-# that nonterminal _X could be parsed between position i and the end
-# of the string
-# 
-# in this state, bitms_lt_k is a map from i:int to a map from
-# nt:nonterm to a set of items blocked at position i on nonterminal nt
 def loop(s: State, ip: Input_parameters):
     # we want to "reset" s every time we increase k, except at the end
     while s.k <= ip.input_length:
@@ -244,6 +234,16 @@ def init_state(init: Init, new_items):
     return s0
 
 
+# entry to Earley parsing -----------------------------------
+
+# the returned value is the final parsing state
+#
+# in this state, ixk_done contains a set of pairs (i,_X), indicating
+# that nonterminal _X could be parsed between position i and the end
+# of the string
+# 
+# in this state, bitms_lt_k is a map from i:int to a map from
+# nt:nonterm to a set of items blocked at position i on nonterminal nt
 # run with an initial nonterminal and the input parameters
 def run_earley(nt, ip: Input_parameters):
     # print("run_earley: input_parameters are: " + str(ip))
